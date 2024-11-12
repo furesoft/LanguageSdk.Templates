@@ -1,0 +1,12 @@
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties">
+
+    <ContentType Name="MyLanguageFile" DisplayName="MyLanguage file" ItemType="Compile">
+    </ContentType>
+
+    <ItemType Name="Compile" DisplayName="MyLanguage compiler" />
+    <ItemType Name="AdditionalFiles" DisplayName="MyLanguage analyzer additional file" />
+    <ItemType Name="EditorConfigFiles" DisplayName=".editorconfig file" />
+
+    <FileExtension Name=".my" ContentType="MyLanguageFile" />
+
+</ProjectSchemaDefinitions>

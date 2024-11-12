@@ -1,0 +1,12 @@
+<Project>
+
+    <!-- Indicate whether `MyLanguage.Sdk` is being used. -->
+    <PropertyGroup>
+        <UsingMyLanguageSdk>true</UsingMyLanguageSdk>
+    </PropertyGroup>
+
+    <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props"/>
+
+    <Import Project="..\Core\MyLanguage.Core.props" Condition="'$(MSBuildProjectExtension)' == '.myproj'"/>
+
+</Project>
