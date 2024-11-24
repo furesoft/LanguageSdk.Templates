@@ -1,4 +1,5 @@
-﻿using Spectre.Console.Cli;
+﻿using DistIL;
+using Spectre.Console.Cli;
 
 namespace MyLanguageC;
 
@@ -6,10 +7,7 @@ public class CompileCommand : Command<DriverSettings>
 {
     public override int Execute(CommandContext context, DriverSettings settings)
     {
-        var driver = new Driver
-        {
-            Settings = settings
-        };
+        var driver = Driver.Create(settings);
 
         driver.Compile();
 

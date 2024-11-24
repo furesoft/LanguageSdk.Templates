@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using DistIL;
+using DistIL.AsmIO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using MyLanguageC;
@@ -25,17 +27,16 @@ public class BuildTask : Task
 
     public override bool Execute()
     {
-        var driver = new Driver();
-
-        driver.ModuleResolver.AddTrustedSearchPaths();
-
-        driver.Settings.OutputPath = OutputPath;
-        driver.Settings.RootNamespace = RootNamespace;
-        driver.Settings.Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray();
-        driver.Settings.Optimize = Optimize;
-        driver.Settings.DebugSymbols = DebugSymbols;
-        driver.Settings.IsDebug = Configuration == "Debug";
-        driver.Settings.Version = Version;
+        var driver = Driver.Create(new DriverSettings
+        {
+            OutputPath = OutputPath,
+            RootNamespace = RootNamespace,
+            Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray(),
+            Optimize = Optimize,
+            DebugSymbols = DebugSymbols,
+            IsDebug = Configuration == "Debug",
+            Version = Version
+        });
 
         foreach (var reference in ReferencePaths)
             try
