@@ -1,10 +1,13 @@
-﻿using DistIL.Passes;
+﻿using DistIL;
+using DistIL.Passes;
 
 namespace MyLanguageC;
 
 public class Optimizer
 {
     private readonly Dictionary<string, OptimizationLevel> _levels;
+
+    public PassManager PassManager { get; set; }
 
     public Optimizer()
     {
@@ -46,10 +49,10 @@ public class Optimizer
         foreach (var level in _levels.Values)
         {
             var pass = level.Passes.Find(p => p.Name.Equals(passName, StringComparison.OrdinalIgnoreCase));
+
             if (pass != null)
             {
                 pass.IsEnabled = false;
-                Console.WriteLine($"Excluded pass: {passName} from level: {level.Level}");
             }
         }
     }
@@ -61,15 +64,31 @@ public class Optimizer
             Console.WriteLine($"Optimization Level: {level.Level}");
             foreach (var pass in level.Passes)
             {
+                Console.WriteLine(pass.IsEnabled ? $"  - Active Pass: {pass.Name}" : $"  - Excluded Pass: {pass.Name}");
+            }
+        }
+    }
+
+    public void CreatePassManager(Compilation compilation)
+    {
+        var pm = new PassManager
+        {
+            Compilation = compilation
+        };
+
+        var passes = pm.AddPasses();
+
+        foreach (var level in _levels.Values)
+        {
+            foreach (var pass in level.Passes)
+            {
                 if (pass.IsEnabled)
                 {
-                    Console.WriteLine($"  - Active Pass: {pass.Name}");
-                }
-                else
-                {
-                    Console.WriteLine($"  - Excluded Pass: {pass.Name}");
+                    passes.Apply(pass.Pass);
                 }
             }
         }
+
+        PassManager = pm;
     }
 }

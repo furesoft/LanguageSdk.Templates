@@ -14,14 +14,19 @@ public class Driver
     public static Driver Create(DriverSettings settings)
     {
         var moduleResolver = new ModuleResolver();
-        var module = moduleResolver.Create(settings.RootNamespace, Version.Parse(settings.Version));
         moduleResolver.AddTrustedSearchPaths();
+
+        var module = moduleResolver.Create(settings.RootNamespace, Version.Parse(settings.Version));
+
+        var compilation = new Compilation(module, new ConsoleLogger(), new CompilationSettings());
+        var optimizer = new Optimizer();
+        optimizer.CreatePassManager(compilation);
 
         return new Driver
         {
-            Compilation = new Compilation(module, new ConsoleLogger(), new CompilationSettings()),
+            Compilation = compilation,
             Settings = settings,
-            Optimizer = new Optimizer()
+            Optimizer = optimizer
         };
     }
 
