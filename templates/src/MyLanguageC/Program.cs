@@ -1,15 +1,12 @@
-﻿﻿namespace TestCompiler;
+﻿using Spectre.Console.Cli;
 
-public class Program
+namespace MyLanguageC;
+
+public static class Program
 {
-    public static void Main()
+    public static int Main(string[] args)
     {
-        var driver = new Driver();
-        driver.Sources = ["test.my"];
-        driver.IsDebug = true;
-        driver.OutputPath = "compiled.dll";
-        driver.DebugSymbols = true;
-
-        var documents = driver.Compile();
+        var app = new CommandApp<CompileCommand>();
+        return app.Run(args);
     }
 }

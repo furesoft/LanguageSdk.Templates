@@ -1,9 +1,8 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using MyLanguageC;
 using Silverfly.Text;
-using TestCompiler;
 
 namespace MyLanguage.Build.Tasks;
 
@@ -30,13 +29,13 @@ public class BuildTask : Task
 
         driver.ModuleResolver.AddTrustedSearchPaths();
 
-        driver.OutputPath = OutputPath;
-        driver.RootNamespace = RootNamespace;
-        driver.Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray();
-        driver.Optimize = Optimize;
-        driver.DebugSymbols = DebugSymbols;
-        driver.IsDebug = Configuration == "Debug";
-        driver.Version = System.Version.Parse(Version);
+        driver.Settings.OutputPath = OutputPath;
+        driver.Settings.RootNamespace = RootNamespace;
+        driver.Settings.Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray();
+        driver.Settings.Optimize = Optimize;
+        driver.Settings.DebugSymbols = DebugSymbols;
+        driver.Settings.IsDebug = Configuration == "Debug";
+        driver.Settings.Version = Version;
 
         foreach (var reference in ReferencePaths)
             try
