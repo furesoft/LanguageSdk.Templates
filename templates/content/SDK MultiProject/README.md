@@ -1,5 +1,6 @@
-The sample in this folder demonstrates:
+## Installation
 
- - **Multi-project template** - Console with an optional unit test project 
-
-See [`template.json`](./.template.config/template.json)
+## Usage
+````shell
+dotnet new lsdk -l:MyLanguage -ext:.my
+````

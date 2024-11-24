@@ -1,21 +1,31 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "furesoft",
-  "classifications": [ "sdk" ], 
+  "classifications": ["sdk"],
   "name": "MSBuild Language SDK",
-  "identity": "furesoft.msbuild.sdk",         
-  "groupIdentity":"furesoft.msbuild",
+  "identity": "furesoft.msbuild.sdk",
+  "groupIdentity": "furesoft.msbuild",
   "shortName": "lsdk",
   "tags": {
     "language": "C#",
-    "type":"project"
+    "type": "project"
   },
   "preferNameDirectory": true,
-  "symbols":{
-    "includetest": {
-        "type": "parameter",
-        "datatype": "bool",
-        "defaultValue": "true"
+  "symbols": {
+    "l": {
+      "type": "parameter",
+      "displayName": "Language Name",
+      "datatype": "text",
+      "isRequired": "true",
+      "replaces": "MyLanguage",
+      "fileRename": "MyLanguage"
+    },
+    "ext": {
+      "type": "parameter",
+      "displayName": "Language File Extension",
+      "datatype": "text",
+      "isRequired": "true",
+      "replaces": ".my"
     }
   }
 }
