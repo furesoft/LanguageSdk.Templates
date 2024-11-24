@@ -1,27 +1,32 @@
-﻿using Spectre.Console.Cli;
+﻿using CommandLine;
 
 namespace MyLanguageC;
 
-public class DriverSettings : CommandSettings
+public class DriverSettings
 {
-    [CommandOption("--debug-symbols")]
+    [Option("debug-symbols", Required = false, HelpText = "Enable debug symbols.")]
     public bool DebugSymbols { get; set; }
 
-    [CommandOption("--is-debug")]
+    [Option("is-debug", Required = false, HelpText = "Specify if in debug mode.")]
     public bool IsDebug { get; set; }
 
-    [CommandOption("--optimize")]
-    public bool Optimize { get; set; }
+    public bool Optimize => OptimizeLevel != "O0";
 
-    [CommandArgument(0, "[sources]")]
-    public string[] Sources { get; set; } = [];
+    [Value(0, MetaName = "sources", HelpText = "Input source files.", Required = true)]
+    public IEnumerable<string> Sources { get; set; } = new List<string>();
 
-    [CommandOption("--output-path")]
-    public string OutputPath { get; set; } = "compiled.dll";
+    [Option("output-path", Default = "compiled.dll", HelpText = "Output path for the compiled file.")]
+    public string OutputPath { get; set; }
 
-    [CommandOption("--root-namespace")]
-    public string RootNamespace { get; set; } = "";
+    [Option("root-namespace", Default = "", HelpText = "Root namespace for the project.")]
+    public string RootNamespace { get; set; }
 
-    [CommandOption("--version")]
-    public string Version { get; set; } = "1.0";
+    [Option("version", Default = "1.0", HelpText = "Version of the project.")]
+    public string Version { get; set; }
+
+    [Option('o', "level", Default = "-O0", HelpText = "Optimization level.")]
+    public string OptimizeLevel { get; set; }
+
+    [Option('e', "exclude", Separator = ',', HelpText = "Comma-separated list of passes to exclude.")]
+    public IEnumerable<string> ExcludedPasses { get; set; } = new List<string>();
 }

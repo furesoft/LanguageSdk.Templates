@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="DistIL.Core" Version="0.10.0-preview" />
     <PackageReference Include="Silverfly" Version="1.0.80" />
-    <PackageReference Include="Spectre.Console.Cli" Version="0.49.2-preview.0.67" />
   </ItemGroup>
 
 </Project>

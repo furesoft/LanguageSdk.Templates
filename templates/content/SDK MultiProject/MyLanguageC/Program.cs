@@ -1,12 +1,24 @@
-﻿using Spectre.Console.Cli;
+﻿using CommandLine;
 
 namespace MyLanguageC;
 
 public static class Program
 {
-    public static int Main(string[] args)
+    public static void Main(string[] args)
     {
-        var app = new CommandApp<CompileCommand>();
-        return app.Run(args);
+        Parser.Default.ParseArguments<DriverSettings>(args)
+            .WithParsed(options =>
+            {
+                var driver = Driver.Create(options);
+
+                driver.Compile();
+            })
+            .WithNotParsed(errors =>
+            {
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ToString());
+                }
+            });
     }
 }

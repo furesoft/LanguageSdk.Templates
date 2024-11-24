@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using DistIL;
-using DistIL.AsmIO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using MyLanguageC;
@@ -19,7 +17,7 @@ public class BuildTask : Task
     [System.ComponentModel.DataAnnotations.Required]
     public ITaskItem[] ReferencePaths { get; set; }
 
-    public bool Optimize { get; set; }
+    public string OptimizeLevel { get; set; }
     public bool DebugSymbols { get; set; }
     public string Configuration { get; set; }
     public string Version { get; set; }
@@ -32,7 +30,7 @@ public class BuildTask : Task
             OutputPath = OutputPath,
             RootNamespace = RootNamespace,
             Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray(),
-            Optimize = Optimize,
+            OptimizeLevel = OptimizeLevel,
             DebugSymbols = DebugSymbols,
             IsDebug = Configuration == "Debug",
             Version = Version

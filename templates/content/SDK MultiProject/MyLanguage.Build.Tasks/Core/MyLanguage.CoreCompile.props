@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="$(Configuration) == 'Release'">
-        <Optimize>true</Optimize>
+        <OptimizeLevel>O2</OptimizeLevel>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
