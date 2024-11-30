@@ -12,5 +12,5 @@ Features:
 
 ## Usage
 ````shell
-dotnet new lsdk -l:MyLanguage -ext:.my
+dotnet new lsdk -p:l MyLanguage -e:.my
 ````

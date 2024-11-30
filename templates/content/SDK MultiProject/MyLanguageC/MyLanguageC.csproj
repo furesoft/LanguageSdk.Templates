@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>mylanguagec</ToolCommandName>
+    <ToolCommandName>MyLanguagec</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
