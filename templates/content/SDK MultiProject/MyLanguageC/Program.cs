@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using LanguageSdk.Templates.Core;
 
 namespace MyLanguageC;
 

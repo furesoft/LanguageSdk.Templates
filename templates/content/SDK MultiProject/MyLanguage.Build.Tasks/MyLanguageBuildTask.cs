@@ -6,38 +6,12 @@ using Silverfly.Text;
 
 namespace MyLanguage.Build.Tasks;
 
-public class BuildTask : Task
+public class MyLanguageBuildTask : LanguagseSdk.Templates.Core.BuildTask
 {
-    [System.ComponentModel.DataAnnotations.Required]
-    public ITaskItem[] SourceFiles { get; set; }
-
-    [System.ComponentModel.DataAnnotations.Required]
-    public string OutputPath { get; set; }
-
-    [System.ComponentModel.DataAnnotations.Required]
-    public ITaskItem[] ReferencePaths { get; set; }
-
-    public ITaskItem[] EmbeddedResources { get; set; }
-
-    public string OptimizeLevel { get; set; }
-    public bool DebugSymbols { get; set; }
-    public string Configuration { get; set; }
-    public string Version { get; set; }
-    public string RootNamespace { get; set; }
-
-    public override bool Execute()
+    
+    public override bool Execute(DriverSettings settings)
     {
-        var driver = Driver.Create(new DriverSettings
-        {
-            OutputPath = OutputPath,
-            RootNamespace = RootNamespace,
-            Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray(),
-            EmbeddedResources = EmbeddedResources.Select(_ => _.ItemSpec).ToArray(),
-            OptimizeLevel = OptimizeLevel,
-            DebugSymbols = DebugSymbols,
-            IsDebug = Configuration == "Debug",
-            Version = Version
-        });
+        var driver = Driver.Create(settings);
 
         foreach (var reference in ReferencePaths)
             try

@@ -35,7 +35,7 @@
     </Target>
 
     <Target Name="CoreCompile" Inputs="@(CoreCompileInput)" Outputs="@(CoreCompileOutput)" DependsOnTargets="GetCoreCompileInputsOutputs;$(CoreCompileDependsOn)">
-        <BuildTask 
+        <MyLanguageBuildTask 
             Condition="'%(_CoreCompileResourceInputs.WithCulture)' != 'true'" 
             SourceFiles="@(Compile)" OutputPath="@(IntermediateAssembly)" 
             ReferencePaths="@(ReferencePathWithRefAssemblies)" 

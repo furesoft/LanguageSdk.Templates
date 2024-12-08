@@ -10,7 +10,7 @@
 
     <!-- NOTE: Using the fully qualified class name in a <UsingTask> tag is faster than using a partially qualified name. -->
 
-    <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)bin\MyLanguage.Build.Tasks.dll" TaskName="MyLanguage.Build.Tasks.BuildTask"/>
+    <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)bin\MyLanguage.Build.Tasks.dll" TaskName="MyLanguage.Build.Tasks.MyLanguageBuildTask"/>
 
     <PropertyGroup>
 

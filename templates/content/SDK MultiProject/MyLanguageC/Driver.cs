@@ -1,6 +1,7 @@
 ﻿using DistIL;
 using DistIL.AsmIO;
 using Silverfly.Text;
+using LanguageSdk.Templates.Core;
 
 namespace MyLanguageC;
 

@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace MyLanguageC;
+namespace LanguageSdk.Templates.Core;
 
 public class DriverSettings
 {
