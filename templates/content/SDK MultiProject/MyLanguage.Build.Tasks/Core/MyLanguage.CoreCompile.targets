@@ -35,7 +35,16 @@
     </Target>
 
     <Target Name="CoreCompile" Inputs="@(CoreCompileInput)" Outputs="@(CoreCompileOutput)" DependsOnTargets="GetCoreCompileInputsOutputs;$(CoreCompileDependsOn)">
-        <BuildTask Condition="'%(_CoreCompileResourceInputs.WithCulture)' != 'true'" SourceFiles="@(Compile)" OutputPath="@(IntermediateAssembly)" ReferencePaths="@(ReferencePathWithRefAssemblies)" Configuration="$(Configuration)" RootNamespace="$(RootNamespace)" DebugSymbols="$(DebugSymbols)" Version="$(Version)" Optimize="$(Optimize)" />
+        <BuildTask 
+            Condition="'%(_CoreCompileResourceInputs.WithCulture)' != 'true'" 
+            SourceFiles="@(Compile)" OutputPath="@(IntermediateAssembly)" 
+            ReferencePaths="@(ReferencePathWithRefAssemblies)" 
+            Configuration="$(Configuration)" 
+            RootNamespace="$(RootNamespace)" DebugSymbols="$(DebugSymbols)" 
+            Version="$(Version)" 
+            Optimize="$(Optimize)"
+            EmbeddedResources="@(EmbeddedResource)"
+        />
 
         <ItemGroup>
             <OutputFiles Include="$(OutputPath)\**\*.dll"/>

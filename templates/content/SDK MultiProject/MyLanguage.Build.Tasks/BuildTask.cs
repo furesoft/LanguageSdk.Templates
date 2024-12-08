@@ -17,6 +17,8 @@ public class BuildTask : Task
     [System.ComponentModel.DataAnnotations.Required]
     public ITaskItem[] ReferencePaths { get; set; }
 
+    public ITaskItem[] EmbeddedResources { get; set; }
+
     public string OptimizeLevel { get; set; }
     public bool DebugSymbols { get; set; }
     public string Configuration { get; set; }
@@ -30,6 +32,7 @@ public class BuildTask : Task
             OutputPath = OutputPath,
             RootNamespace = RootNamespace,
             Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray(),
+            EmbeddedResources = EmbeddedResources.Select(_ => _.ItemSpec).ToArray(),
             OptimizeLevel = OptimizeLevel,
             DebugSymbols = DebugSymbols,
             IsDebug = Configuration == "Debug",
@@ -44,6 +47,18 @@ public class BuildTask : Task
             catch
             {
             }
+
+        foreach(var er in EmbeddedResources)
+        {
+            //ToDo: implement embeddedresources
+            /*
+```cs
+        var resource1 = asm.CreateEmbeddedResource("data1", [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        var resource2 = new LinkedResource(asm, "ref2", System.Reflection.ManifestResourceAttributes.Public, "lorem_ipsum.txt", []);
+        asm.ManifestResources.Add(resource2);
+```
+            */
+        }
 
         var documents = driver.Compile();
 

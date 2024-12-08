@@ -28,5 +28,8 @@ public class DriverSettings
     public string OptimizeLevel { get; set; }
 
     [Option('e', "exclude", Separator = ',', HelpText = "Comma-separated list of passes to exclude.")]
-    public IEnumerable<string> ExcludedPasses { get; set; } = new List<string>();
+    public IEnumerable<string> ExcludedPasses { get; set; } = [];
+
+    [Option('r', "resource")]
+    public IEnumerable<string> EmbeddedResources { get; set; } = [];
 }
