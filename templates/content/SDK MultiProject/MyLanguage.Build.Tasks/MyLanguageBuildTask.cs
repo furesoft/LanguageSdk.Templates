@@ -8,7 +8,6 @@ namespace MyLanguage.Build.Tasks;
 
 public class MyLanguageBuildTask : LanguagseSdk.Templates.Core.BuildTask
 {
-    
     public override bool Execute(DriverSettings settings)
     {
         var driver = Driver.Create(settings);
@@ -24,14 +23,10 @@ public class MyLanguageBuildTask : LanguagseSdk.Templates.Core.BuildTask
 
         foreach(var er in EmbeddedResources)
         {
-            //ToDo: implement embeddedresources
-            /*
-```cs
-        var resource1 = asm.CreateEmbeddedResource("data1", [1, 2, 3, 4, 5, 6, 7, 8, 9]);
-        var resource2 = new LinkedResource(asm, "ref2", System.Reflection.ManifestResourceAttributes.Public, "lorem_ipsum.txt", []);
-        asm.ManifestResources.Add(resource2);
-```
-            */
+            var name = Path.GetFileName(er);
+            var data = File.ReadAllBytes(er);
+            
+            asm.CreateEmbeddedResource(name, er);
         }
 
         var documents = driver.Compile();

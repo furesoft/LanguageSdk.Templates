@@ -37,8 +37,8 @@ public abstract class BuildTask : Task
             Version = Version
         };
 
-        return true;
+        return Execute(settings);
     }
 
-    protected abstract void Execute(DriverSettings settings);
+    protected abstract bool Execute(DriverSettings settings);
 }
