@@ -48,7 +48,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyLanguageC\MyLanguageC.csproj" />
-    <PackageReference Include="LanguageSdk.Templates.Core" Version="1.4.0" />
+    <PackageReference Include="LanguageSdk.Templates.Core" Version="1.5.0" />
   </ItemGroup>
 
 </Project>
