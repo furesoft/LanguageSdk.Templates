@@ -4,7 +4,8 @@ using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-public abstract class BuildTask : Task
+public abstract class BuildTask<T> : Task
+    where T : DriverSettings, new()
 {
     [System.ComponentModel.DataAnnotations.Required]
     public ITaskItem[] SourceFiles { get; set; }
@@ -25,7 +26,7 @@ public abstract class BuildTask : Task
 
     public override bool Execute()
     {
-        var settings = new DriverSettings
+        var settings = new T
         {
             OutputPath = OutputPath,
             RootNamespace = RootNamespace,
@@ -40,5 +41,5 @@ public abstract class BuildTask : Task
         return Execute(settings);
     }
 
-    protected abstract bool Execute(DriverSettings settings);
+    protected abstract bool Execute(T settings);
 }

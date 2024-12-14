@@ -8,7 +8,7 @@
 
   <PropertyGroup Label="PackageInfo">
     <PackageId>LanguageSdk.Templates.Core</PackageId>
-    <Version>1.4</Version>
+    <Version>1.5</Version>
     <PackageTags>msbuild sdk</PackageTags>
     <Description>MSBuild SDK helper</Description>
     <RepositoryUrl>https://github.com/furesoft/LanguageSdk.Templates</RepositoryUrl>

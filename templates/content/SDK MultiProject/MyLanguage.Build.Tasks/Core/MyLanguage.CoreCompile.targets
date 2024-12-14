@@ -41,7 +41,7 @@
             ReferencePaths="@(ReferencePathWithRefAssemblies)" 
             Configuration="$(Configuration)" 
             RootNamespace="$(RootNamespace)" DebugSymbols="$(DebugSymbols)" 
-            Version="$(Version)" 
+            Version="$(Version)"
             Optimize="$(Optimize)"
             EmbeddedResources="@(EmbeddedResource)"
         />
