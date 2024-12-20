@@ -8,7 +8,7 @@ public abstract class BuildTask<T> : Task
     where T : DriverSettings, new()
 {
     [System.ComponentModel.DataAnnotations.Required]
-    public ITaskItem[] SourceFiles { get; set; }
+    public ITaskItem[] SourceFiles { get; set; } = [];
 
     [System.ComponentModel.DataAnnotations.Required]
     public string OutputPath { get; set; }
@@ -16,7 +16,7 @@ public abstract class BuildTask<T> : Task
     [System.ComponentModel.DataAnnotations.Required]
     public ITaskItem[] ReferencePaths { get; set; }
 
-    public ITaskItem[] EmbeddedResources { get; set; }
+    public ITaskItem[] EmbeddedResources { get; set; } = [];
 
     public string OptimizeLevel { get; set; }
     public bool DebugSymbols { get; set; }
@@ -30,8 +30,8 @@ public abstract class BuildTask<T> : Task
         {
             OutputPath = OutputPath,
             RootNamespace = RootNamespace,
-            Sources = SourceFiles.Select(_ => _.ItemSpec).ToArray(),
-            EmbeddedResources = EmbeddedResources.Select(_ => _.ItemSpec).ToArray(),
+            Sources = SourceFiles?.Select(_ => _.ItemSpec).ToArray(),
+            EmbeddedResources = EmbeddedResources?.Select(_ => _.ItemSpec).ToArray(),
             OptimizeLevel = OptimizeLevel,
             DebugSymbols = DebugSymbols,
             IsDebug = Configuration == "Debug",

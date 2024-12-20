@@ -21,7 +21,7 @@
 
   <PropertyGroup Label="PackageInfo">
     <PackageId>MyLanguage.Sdk</PackageId>
-    <Version>0.1.5</Version>
+    <Version>0.1.6</Version>
     <PackageType>MSBuildSdk</PackageType>
     <PackageTags>msbuild sdk MyLanguage</PackageTags>
     <Description>MSBuild SDK for MyLanguage</Description>
@@ -48,7 +48,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyLanguageC\MyLanguageC.csproj" />
-    <PackageReference Include="LanguageSdk.Templates.Core" Version="1.5.0" />
+    <PackageReference Include="LanguageSdk.Templates.Core" Version="1.6.0" />
   </ItemGroup>
 
 </Project>

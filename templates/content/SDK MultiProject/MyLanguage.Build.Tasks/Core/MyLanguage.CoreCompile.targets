@@ -42,7 +42,7 @@
             Configuration="$(Configuration)" 
             RootNamespace="$(RootNamespace)" DebugSymbols="$(DebugSymbols)" 
             Version="$(Version)"
-            Optimize="$(Optimize)"
+            OptimizeLevel="$(OptimizeLevel)"
             EmbeddedResources="@(EmbeddedResource)"
         />
 
