@@ -10,7 +10,7 @@ public class DriverSettings
     [Option("is-debug", Required = false, HelpText = "Specify if in debug mode.")]
     public bool IsDebug { get; set; }
 
-    public bool Optimize => OptimizeLevel != "O0";
+    public bool ShouldOptimize => OptimizeLevel != "O0";
 
     [Value(0, MetaName = "sources", HelpText = "Input source files.", Required = true)]
     public IEnumerable<string> Sources { get; set; } = new List<string>();

@@ -1,4 +1,5 @@
 ﻿using DistIL;
+using DistIL.AsmIO;
 using DistIL.Passes;
 
 namespace LanguageSdk.Templates.Core;
@@ -88,5 +89,10 @@ public class Optimizer
         }
 
         PassManager = pm;
+    }
+
+    public void Run(IReadOnlyCollection<MethodDef> methods)
+    {
+        PassManager.Run(methods);
     }
 }
