@@ -1,12 +1,12 @@
 ﻿using System.Text;
 using DistIL.Passes;
 
-namespace MyLanguageC;
+namespace LanguageSdk.Templates.Core;
 
 public class OptimizationLevel(string level)
 {
     public string Level { get; } = level;
-    public List<OptimizationPass> Passes { get; } = new();
+    public List<OptimizationPass> Passes { get; } = [];
 
     public void AddPass(OptimizationPass pass)
     {

@@ -1,7 +1,7 @@
 ﻿using DistIL;
 using DistIL.Passes;
 
-namespace MyLanguageC;
+namespace LanguageSdk.Templates.Core;
 
 public class Optimizer
 {
@@ -31,8 +31,6 @@ public class Optimizer
     {
         if (_levels.TryGetValue(level, out var level1))
         {
-            Console.WriteLine($"Setting optimization level: {level}");
-            // Enable all passes for this level
             foreach (var pass in level1.Passes)
             {
                 pass.IsEnabled = true;

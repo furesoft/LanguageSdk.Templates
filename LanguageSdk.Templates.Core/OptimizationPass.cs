@@ -1,6 +1,6 @@
 ﻿using DistIL.Passes;
 
-namespace MyLanguageC;
+namespace LanguageSdk.Templates.Core;
 
 public class OptimizationPass(string name)
 {

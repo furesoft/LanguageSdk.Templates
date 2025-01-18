@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using LanguageSdk.Templates.Core;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using MyLanguageC;
@@ -6,9 +8,9 @@ using Silverfly.Text;
 
 namespace MyLanguage.Build.Tasks;
 
-public class MyLanguageBuildTask : LanguagseSdk.Templates.Core.BuildTask
+public class MyLanguageBuildTask : LanguageSdk.Templates.Core.BuildTask<DriverSettings>
 {
-    public override bool Execute(DriverSettings settings)
+    protected override bool Execute(DriverSettings settings)
     {
         var driver = Driver.Create(settings);
 
@@ -23,10 +25,8 @@ public class MyLanguageBuildTask : LanguagseSdk.Templates.Core.BuildTask
 
         foreach(var er in EmbeddedResources)
         {
-            var name = Path.GetFileName(er);
-            var data = File.ReadAllBytes(er);
-            
-            asm.CreateEmbeddedResource(name, er);
+            var name = Path.GetFileName(er.ItemSpec);
+            driver.Compilation.Module.CreateEmbeddedResource(name, File.ReadAllBytes(er.ItemSpec));
         }
 
         var documents = driver.Compile();

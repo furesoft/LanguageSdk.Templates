@@ -4,7 +4,7 @@
     <IsTool>true</IsTool>
     <AssemblyName>MyLanguage.Build.Tasks</AssemblyName>
     <RootNamespace>MyLanguage.Build.Tasks</RootNamespace>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <EnableDefaultBuildItems>true</EnableDefaultBuildItems>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Description>No</Description>
@@ -21,7 +21,7 @@
 
   <PropertyGroup Label="PackageInfo">
     <PackageId>MyLanguage.Sdk</PackageId>
-    <Version>0.1.6</Version>
+    <Version>1.7</Version>
     <PackageType>MSBuildSdk</PackageType>
     <PackageTags>msbuild sdk MyLanguage</PackageTags>
     <Description>MSBuild SDK for MyLanguage</Description>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DistIL.Core" Version="0.11.0-preview" PrivateAssets="all" />
+    <PackageReference Include="DistIL.Core" Version="0.11.1-preview" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Build.Framework" Version="17.12.6"/>
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.12.6"/>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.12.6"/>
