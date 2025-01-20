@@ -24,7 +24,7 @@ public class DriverSettings
     [Option("version", Default = "1.0", HelpText = "Version of the project.")]
     public string Version { get; set; }
 
-    [Option('o', "level", Default = "-O0", HelpText = "Optimization level.")]
+    [Option('o', "level", Default = "O0", HelpText = "Optimization level.")]
     public string OptimizeLevel { get; set; }
 
     [Option('e', "exclude", Separator = ',', HelpText = "Comma-separated list of passes to exclude.")]
