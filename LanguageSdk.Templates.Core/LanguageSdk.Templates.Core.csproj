@@ -8,7 +8,7 @@
 
   <PropertyGroup Label="PackageInfo">
     <PackageId>LanguageSdk.Templates.Core</PackageId>
-    <Version>1.9</Version>
+    <Version>2.0</Version>
     <PackageTags>msbuild sdk</PackageTags>
     <Description>MSBuild SDK helper</Description>
     <RepositoryUrl>https://github.com/furesoft/LanguageSdk.Templates</RepositoryUrl>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DistIL.Core" Version="0.12.0" />
+    <PackageReference Include="DistIL.Core" Version="0.13.0-preview" />
     <PackageReference Include="Microsoft.Build.Framework" Version="17.12.6"/>
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.12.6"/>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.12.6"/>

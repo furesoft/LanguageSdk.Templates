@@ -6,26 +6,54 @@ namespace LanguageSdk.Templates.Core;
 
 public class Optimizer
 {
-    private readonly Dictionary<string, OptimizationLevel> _levels;
+    private readonly Dictionary<string, OptimizationLevel> _levels = [];
 
     public PassManager PassManager { get; set; }
 
-    public Optimizer()
+    public void DefineOptimizationLevel(string name, Action<OptimizationLevel> builder)
     {
-        _levels = new Dictionary<string, OptimizationLevel>
-        {
-            { "O0", new OptimizationLevel("O0") },
-            { "O1", new OptimizationLevel("O1") },
-            { "O2", new OptimizationLevel("O2") },
-            { "O3", new OptimizationLevel("O3") }
-        };
+        var optLevel = new OptimizationLevel(name);
+        builder(optLevel);
 
-        // Define passes
-        foreach (var level in _levels.Values)
+        _levels.Add(name, optLevel);
+    }
+
+    public void DefineDefaults()
+    {
+        DefineOptimizationLevel("O0", lvl =>
         {
-            level.AddPass(new DeadCodeElim());
-            level.AddPass(new SimplifyCFG());
-        }
+
+        });
+
+        DefineOptimizationLevel("O1", lvl =>
+        {
+            lvl.AddPass(new DeadCodeElim());
+            lvl.AddPass(new SimplifyCFG());
+        });
+
+        DefineOptimizationLevel("O2", lvl =>
+        {
+            ApplyFromOtherPass("O1", lvl);
+
+            lvl.AddPass(new AssertionProp());
+            lvl.AddPass(new InlineMethods());
+            lvl.AddPass(new PresizeLists());
+        });
+
+        DefineOptimizationLevel("O3", lvl =>
+        {
+            ApplyFromOtherPass("O2", lvl);
+
+            lvl.AddPass(new ScalarReplacement());
+            lvl.AddPass(new ValueNumbering());
+            lvl.AddPass(new LoopStrengthReduction());
+            lvl.AddPass(new SsaPromotion());
+        });
+    }
+
+    public void ApplyFromOtherPass(string name, OptimizationLevel lvl)
+    {
+        _levels[name].Passes.ForEach(p => lvl.AddPass(p.Pass));
     }
 
     public void SetOptimizationLevel(string level)
@@ -68,7 +96,7 @@ public class Optimizer
         }
     }
 
-    public void CreatePassManager(Compilation compilation)
+    public void CreatePassManager(Compilation compilation, DriverSettings settings)
     {
         var pm = new PassManager
         {
@@ -77,14 +105,11 @@ public class Optimizer
 
         var passes = pm.AddPasses();
 
-        foreach (var level in _levels.Values)
+        foreach (var pass in _levels[settings.OptimizeLevel].Passes)
         {
-            foreach (var pass in level.Passes)
+            if (pass.IsEnabled)
             {
-                if (pass.IsEnabled)
-                {
-                    passes.Apply(pass.Pass);
-                }
+                passes.Apply(pass.Pass);
             }
         }
 
